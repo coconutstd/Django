@@ -1,8 +1,12 @@
 {% extends 'blog/base.html' %}
 {% block title %}{{ object.title }} - Blog{% endblock %}
 {% block content %}
-<h1>{{ object.title }}</h1>
-<div>
-    {{ object.content }}
-</div>
+    <h1>{{ object.title }}</h1>
+    <div>
+        {{ object.content }}
+        <br/>
+        {% for tag in object.tags.all %}
+            <a href="{{ tag.get_absolute_url }}">#{{ tag }}</a>
+        {% endfor %}
+    </div>
 {% endblock %}
