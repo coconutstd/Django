@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdown
 
+
 class Category(models.Model):
     name = models.CharField(max_length=25, unique=True)
     description = models.TextField(blank=True)
@@ -17,6 +18,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'categories'
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=40, unique=True)
@@ -33,7 +35,7 @@ class Post(models.Model):
     title = models.CharField(max_length=30)
     content = MarkdownxField()
 
-    head_Image = models.ImageField(upload_to='blog/%Y/%m/%d/', blank=True)
+    head_image = models.ImageField(upload_to='blog/%Y/%m/%d/', blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=True)
@@ -53,7 +55,11 @@ class Post(models.Model):
     def get_markdown_content(self):
         return markdown(self.content)
 
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = MarkdownxField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def get_markdown_content(self):
+        return markdown(self.text)
