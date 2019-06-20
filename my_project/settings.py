@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'crispy_forms',
     'markdownx',
 ]
 
@@ -128,3 +128,6 @@ MEDIA_URL = '/media/'
 from datetime import datetime
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
