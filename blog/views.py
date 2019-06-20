@@ -120,7 +120,8 @@ def delete_comment(request, pk):
         comment.delete()
         return redirect(post.get_absolute_url() + '#comment-list')
     else:
-        return redirect('/blog/')
+        raise PermissionError('Comment 삭제할 권한이 없습니다.')
+
 
 
 
