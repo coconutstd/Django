@@ -88,8 +88,8 @@ class TestModel(TestCase):
 
         self.assertEqual(post_000.tags.count(),2) #post는 여러개의 tag를 가질 수 있다.
         self.assertEqual(tag_001.post_set.count(),2)  #하나의 tag는 여러개의 post에 붙을 수 있다.
-        self.assertEqual(tag_001.post_set.first(), post_000) #하나의 tag는 자신을 가진 post들을 불러 올 수 있다
-        self.assertEqual(tag_001.post_set.last(), post_001) #하나의 tag는 자신을 가진 post들을 불러 올 수 있다
+        self.assertEqual(tag_001.post_set.first(), post_001) #하나의 tag는 자신을 가진 post들을 불러 올 수 있다
+        self.assertEqual(tag_001.post_set.last(), post_000) #하나의 tag는 자신을 가진 post들을 불러 올 수 있다
 
 
 
@@ -200,6 +200,39 @@ class TestView(TestCase):
         # Tag
         post_card_000 = main_div.find('div', id='post-card-{}'.format(post_000.pk))
         self.assertIn('#america',post_card_000.text)
+
+
+    def test_pagination(self):
+        # post가 적은 경우
+        for i in range(0,3):
+            post = create_post(
+                title='The post No. {}'.format(i),
+                content='Content {}'.format(i),
+                author=self.author_000,
+            )
+
+        response = self.client.get('/blog/')
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        self.assertNotIn('Older',soup.body.text)
+        self.assertNotIn('Newer',soup.body.text)
+
+        # post가 적은 경우
+        for i in range(3, 10):
+            post = create_post(
+                title='The post No. {}'.format(i),
+                content='Content {}'.format(i),
+                author=self.author_000,
+            )
+
+        response = self.client.get('/blog/')
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        self.assertIn('Older', soup.body.text)
+        self.assertIn('Newer', soup.body.text)
+
 
 
     def test_post_detail(self):
