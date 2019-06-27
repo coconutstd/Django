@@ -1,4 +1,6 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdown
@@ -33,7 +35,7 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=30)
-    content = MarkdownxField()
+    content = RichTextUploadingField()
 
     head_image = models.ImageField(upload_to='blog/%Y/%m/%d/', blank=True)
 
@@ -54,10 +56,6 @@ class Post(models.Model):
 
     def get_update_url(self):
         return self.get_absolute_url() + 'update/'
-
-    def get_markdown_content(self):
-        return markdown(self.content)
-
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

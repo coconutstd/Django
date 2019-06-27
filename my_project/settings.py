@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
+
+    'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
     'markdownx',
     'blog',
@@ -145,9 +148,27 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
 MEDIA_URL = '/media/'
 
-from datetime import datetime
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
-MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'format_tags': 'p;h2;h3',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format'],
+            ['Blockquote', 'Bold', 'Italic', 'Subscript', 'Superscript', '-', 'RemoveFormat', 'NumberedList',
+             'BulletedList', '-', 'PasteFromWord'],
+            ['Link', 'Unlink', 'Embed', 'Image'],
+            ['HorizontalRule', 'SpecialChar', 'SpellChecker'],
+            ['Source']
+        ],
+        'extraPlugins': 'embed',
+        'allowedContent': 'p b a',
+    }
+}
+
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

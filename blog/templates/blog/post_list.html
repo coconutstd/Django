@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+
 {% block content %}
     {% if user.is_authenticated %}
         <button class="btn btn-primary btn-sm float-right" onclick="location.href='/blog/create/'">New Post</button>
@@ -25,7 +26,7 @@
                         <span class="badge badge-primary float-right">미분류</span>
                     {% endif %}
                     <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content | truncatewords:50}}</p>
+                    <p class="card-text">{{ p.content | truncatewords:50 }}</p>
 
                     {% for tag in p.tags.all %}
                         <a href="{{ tag.get_absolute_url }}">#{{ tag }} </a>
@@ -68,4 +69,5 @@
     {% else %}
         <h3>아직 게시물이 없습니다</h3>
     {% endif %}
+
 {% endblock %}

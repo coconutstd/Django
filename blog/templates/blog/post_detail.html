@@ -35,7 +35,7 @@
     {% endif %}
 
     <!-- Post Content -->
-    {{ object.get_markdown_content | safe }}
+    {{ object.content | safe }}
 
     <br/>
     {% for tag in object.tags.all %}
