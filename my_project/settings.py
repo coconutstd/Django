@@ -152,25 +152,6 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
-CKEDITOR_CONFIGS = {
-    'default': {
-        'format_tags': 'p;h2;h3',
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Format'],
-            ['Blockquote', 'Bold', 'Italic', 'Subscript', 'Superscript', '-', 'RemoveFormat', 'NumberedList',
-             'BulletedList', '-', 'PasteFromWord'],
-            ['Link', 'Unlink', 'Embed', 'Image'],
-            ['HorizontalRule', 'SpecialChar', 'SpellChecker'],
-            ['Source']
-        ],
-        'extraPlugins': 'embed',
-        'allowedContent': 'p b a',
-    }
-}
-
-
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/blog/'
