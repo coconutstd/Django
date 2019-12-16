@@ -26,7 +26,11 @@
                         <span class="badge badge-primary float-right">미분류</span>
                     {% endif %}
                     <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content | truncatewords:50 }}</p>
+                    <p class="card-text">
+                        {% autoescape off %}
+                        {{ p.content | truncatewords:50|truncatewords_html:50}}
+                        {% endautoescape %}
+                    </p>
 
                     {% for tag in p.tags.all %}
                         <a href="{{ tag.get_absolute_url }}">#{{ tag }} </a>
